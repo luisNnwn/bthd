@@ -243,23 +243,49 @@
     });
 
     // Countdown timer
-    const nextBirthday = new Date('January 10, 2025 00:00:00').getTime();
-    const countdownTimer = setInterval(function() {
-        const now = new Date().getTime();
-        const timeLeft = nextBirthday - now;
+    function isJanuary10Today() {
+        const today = new Date();
+        return today.getMonth() === 0 && today.getDate() === 10;
+    }
 
-        const days = Math.floor(timeLeft / (1000 * 60 * 60 * 24));
-        const hours = Math.floor((timeLeft % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-        const minutes = Math.floor((timeLeft % (1000 * 60 * 60)) / (1000 * 60));
-        const seconds = Math.floor((timeLeft % (1000 * 60)) / 1000);
+    function getNextJanuary10() {
+        const now = new Date();
+        let year = now.getFullYear();
 
-        document.getElementById('countdown-timer').innerHTML = `${days} días ${hours} horas ${minutes} minutos ${seconds} segundos`;
+        let target = new Date(year, 0, 10, 0, 0, 0);
 
-        if (timeLeft < 0) {
-            clearInterval(countdownTimer);
-            document.getElementById('countdown-timer').innerHTML = "¡Feliz cumpleaños!";
+        // Si hoy es 11 de enero o más adelante, usar el siguiente año
+        if (now > new Date(year, 0, 10, 23, 59, 59)) {
+            target = new Date(year + 1, 0, 10, 0, 0, 0);
         }
-    }, 1000);
+
+        return target;
+    }
+
+    function updateCountdown() {
+        const timer = document.getElementById('countdown-timer');
+
+        // 🎉 Si hoy es 10 de enero
+        if (isJanuary10Today()) {
+            timer.innerHTML = "🎉 ¡Feliz cumpleaños! 🎂";
+            return;
+        }
+
+        const now = new Date().getTime();
+        const target = getNextJanuary10().getTime();
+        const diff = target - now;
+
+        const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+        const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+        const seconds = Math.floor((diff % (1000 * 60)) / 1000);
+
+        timer.innerHTML =
+            `${days} días ${hours} horas ${minutes} minutos ${seconds} segundos`;
+    }
+
+    updateCountdown();
+    setInterval(updateCountdown, 1000);
 
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(
