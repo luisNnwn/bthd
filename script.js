@@ -24,7 +24,7 @@ audio.entry.loop = true;
 audio.final.loop = true;
 
 audio.ambient.volume = 0.4;
-audio.heartbeat.volume = 0.7;
+audio.heartbeat.volume = 0.9;
 audio.entry.volume = 0.6;
 audio.final.volume = 0.5;
 audio.decision.volume = 0.7;
@@ -240,4 +240,23 @@ continueBtn.onclick = () => {
   window.location.href = "paginaRandom.html";
 };
 
-showScene("inicio");
+window.addEventListener("load", () => {
+  const introOverlay = document.getElementById("intro-overlay");
+
+  // seguridad: si no existe, no bloquea el juego
+  if (!introOverlay) {
+    showScene("inicio");
+    return;
+  }
+
+  setTimeout(() => {
+    introOverlay.style.transition = "opacity 1s";
+    introOverlay.style.opacity = "0";
+
+    setTimeout(() => {
+      introOverlay.style.display = "none";
+      showScene("inicio");
+    }, 1000);
+
+  }, 6000); // 6 segundos
+});
