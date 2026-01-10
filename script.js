@@ -24,7 +24,7 @@ audio.entry.loop = true;
 audio.final.loop = true;
 
 audio.ambient.volume = 0.4;
-audio.heartbeat.volume = 0.3;
+audio.heartbeat.volume = 0.7;
 audio.entry.volume = 0.6;
 audio.final.volume = 0.5;
 audio.decision.volume = 0.7;
