@@ -1,0 +1,149 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background: black;
+  color: #eaeaea;
+  font-family: "Georgia", serif;
+  height: 100vh;
+  overflow: hidden;
+}
+
+/* Imagen */
+#image-container {
+  height: 40%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-bottom: 1px dashed #444;
+}
+
+#scene-image {
+  max-height: 100%;
+  max-width: 100%;
+  opacity: 0.85;
+  position: relative;
+  z-index: 5;
+}
+
+/* Juego */
+#game-container {
+  height: 60%;
+  padding: 30px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+#text {
+  font-size: 1.2rem;
+  line-height: 1.6;
+  margin-bottom: 25px;
+  white-space: pre-wrap;
+  position: relative;
+  z-index: 5;
+}
+
+/* Opciones */
+#choices button,
+#continue-btn {
+  background: none;
+  border: 1px dashed #888;
+  color: inherit;
+  padding: 10px 15px;
+  margin-top: 10px;
+  cursor: pointer;
+}
+
+/* Fade */
+#fade {
+  position: fixed;
+  inset: 0;
+  background: white;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 3s;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* MODO FINAL */
+body.final {
+  background: white;
+  color: black;
+}
+
+#fade-text {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 4rem;
+  font-weight: bold;
+  color: black;
+  opacity: 0;
+  transition: opacity 2s;
+  pointer-events: none;
+  z-index: 10;
+}
+
+/*Hola si estás leyendo esto, está algo dificil mostrar
+el texto final, pero lo voy a arreglar, saludos.*/
+
+body.final {
+  background: white;
+  color: black;
+}
+
+body.final #choices button {
+  border-color: black;
+  color: black;
+  position: relative;
+  z-index: 5;
+}
+
+#continue-btn {
+  display: none; 
+  position: fixed;
+  bottom: 40px;
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 12px 24px;
+  font-size: 1rem;
+  background: white;
+  border: 2px solid black;
+  color: black;
+  cursor: pointer;
+}
+
+#continue-btn:hover {
+  background: black;
+  color: white;
+}
+
+body.final #game-container {
+  position: relative;
+  z-index: 10;
+}
+
+/*El texto se ve montado al final junto con el botón y sale
+del recuadro tons:*/
+body.final {
+  overflow-y: auto;
+}
+
+body.final #image-container {
+  display: none;
+}
+
+body.final #game-container {
+  height: auto;
+  justify-content: flex-start;
+  padding-top: 60px;
+}
+
